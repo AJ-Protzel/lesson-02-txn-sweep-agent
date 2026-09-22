@@ -1,7 +1,8 @@
-"""What the customer told us in discovery. Edit here, not in the agent."""
+"""LESSON EXAMPLE ONLY. Not shipped to the customer.
 
-# The customer's database is only the tmp_ tables; nothing else is in scope.
-TABLE_PREFIX = "tmp_"
+Sample discovery answers used to develop and test this agent. A real deployment
+supplies its own values; nothing here is customer data.
+"""
 
 # Every account the customer expects to see in their transaction data.
 # Discover is deliberately absent from the seeded data to test the

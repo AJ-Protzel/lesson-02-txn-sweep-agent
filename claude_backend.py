@@ -13,14 +13,15 @@ import shutil
 import subprocess
 from pathlib import Path
 
-MODEL = "claude-opus-5"
+MODEL = "claude-sonnet-5"
+EFFORT = "medium"
 EFFORTS = ["low", "medium", "high", "xhigh", "max"]
 
 # Models that accept the server-side refusal fallback.
 FALLBACK_MODELS = {"claude-opus-5"}
 
 
-def call_api(messages: list[dict], system: str, model: str = MODEL, effort: str = "low") -> str:
+def call_api(messages: list[dict], system: str, model: str = MODEL, effort: str = EFFORT) -> str:
     """One turn through the Anthropic API. Bills API credits."""
     import anthropic
 
@@ -55,7 +56,7 @@ def find_claude() -> str:
     raise RuntimeError("Claude Code not found; install it or use --backend api")
 
 
-def call_cli(messages: list[dict], system: str, model: str = MODEL, effort: str = "low") -> str:
+def call_cli(messages: list[dict], system: str, model: str = MODEL, effort: str = EFFORT) -> str:
     """One turn through `claude -p`. Runs on the Claude Code subscription.
 
     Each `claude -p` call starts fresh, so a multi-turn exchange is replayed as a
@@ -98,5 +99,5 @@ def add_backend_args(parser) -> None:
     parser.add_argument("--backend", default="api", choices=list(BACKENDS),
                         help="api: API credits (default); cli: Claude Code subscription")
     parser.add_argument("--model", default=MODEL)
-    parser.add_argument("--effort", default="low", choices=EFFORTS,
-                        help="how hard the model thinks (default: low)")
+    parser.add_argument("--effort", default=EFFORT, choices=EFFORTS,
+                        help=f"how hard the model thinks (default: {EFFORT})")
