@@ -4,3 +4,8 @@ __pycache__/
 venv/
 .env
 .DS_Store
+.env.*
+
+# Sweep output can hold real transaction data; keep it local.
+reports/
+output/
