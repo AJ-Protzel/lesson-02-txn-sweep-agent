@@ -1,0 +1,104 @@
+id,account_name,txn_date,merchant,amount,category
+1,Amex Credit Card,2026-09-13,Spotify,11.99,
+2,Chase Checking,2026-09-18,Netflix,15.49,Gas
+3,Chase Checking,2026-09-14,Spotify,11.99,
+4,Amex Credit Card,2026-09-10,Shell Gas,53.79,Utilities
+5,Amex Credit Card,2026-09-09,Chevron,45.27,Groceries
+6,Chase Savings,2026-09-14,Starbucks,9.53,Subscriptions
+7,Amex Credit Card,2026-09-07,Starbucks,8.23,Shopping
+8,Chase Savings,2026-09-04,Starbucks,13.98,Gas
+9,Chase Savings,2026-09-11,Chevron,50.24,Shopping
+10,Chase Savings,2026-09-18,Shell Gas,60.59,Subscriptions
+11,Amex Credit Card,2026-09-05,Target,31.72,Shopping
+12,Amex Credit Card,2026-09-14,Trader Joe's,18.92,Subscriptions
+13,Chase Savings,2026-09-09,Chevron,63.22,Dining
+14,Amex Credit Card,2026-09-08,Netflix,15.49,Subscriptions
+15,Chase Checking,2026-09-02,Chevron,38.23,Dining
+16,Chase Checking,2026-09-12,Amazon,136.05,
+17,Chase Checking,2026-09-11,Amazon,191.78,Gas
+18,Amex Credit Card,2026-09-18,Shell Gas,27.02,Groceries
+19,Chase Savings,2026-09-12,Target,99.72,Subscriptions
+20,Amex Credit Card,2026-09-21,Safeway,85.70,Gas
+21,Chase Checking,2026-09-14,Safeway,84.23,Groceries
+22,Amex Credit Card,2026-09-15,PG&E,138.73,Utilities
+23,Amex Credit Card,2026-09-16,Amazon,61.47,Shopping
+24,Chase Checking,2026-09-04,Spotify,11.99,Shopping
+25,Amex Credit Card,2026-09-20,Chevron,21.91,
+26,Amex Credit Card,2026-09-19,Netflix,15.49,
+27,Amex Credit Card,2026-09-17,PG&E,102.04,Gas
+28,Chase Checking,2026-09-20,Starbucks,6.46,Groceries
+29,Chase Checking,2026-09-13,Spotify,11.99,Subscriptions
+30,Chase Checking,2026-09-06,Amazon,78.95,
+31,Amex Credit Card,2026-09-03,Spotify,11.99,Shopping
+32,Chase Checking,2026-09-05,Amazon,110.97,
+33,Amex Credit Card,2026-09-10,Netflix,15.49,Subscriptions
+34,Chase Checking,2026-09-18,Trader Joe's,11.68,Shopping
+35,Chase Checking,2026-09-02,Spotify,11.99,Groceries
+36,Amex Credit Card,2026-09-14,Target,88.13,Groceries
+37,Chase Checking,2026-09-03,Trader Joe's,42.09,Shopping
+38,Chase Checking,2026-09-15,Target,42.70,Dining
+39,Amex Credit Card,2026-09-02,Trader Joe's,77.43,Shopping
+40,Chase Savings,2026-09-16,PG&E,172.66,Subscriptions
+41,Chase Savings,2026-09-11,Spotify,11.99,Dining
+42,Amex Credit Card,2026-09-10,Netflix,15.49,Subscriptions
+43,Chase Checking,2026-09-03,Chevron,43.13,
+44,Chase Checking,2026-09-06,Spotify,11.99,
+45,Chase Savings,2026-09-09,Safeway,115.15,Subscriptions
+46,Chase Checking,2026-09-18,Target,124.61,Subscriptions
+47,Chase Savings,2026-09-02,Starbucks,5.90,
+48,Chase Savings,2026-09-07,Target,73.02,
+49,Amex Credit Card,2026-09-19,PG&E,155.46,
+50,Amex Credit Card,2026-09-21,Amazon,9.38,Groceries
+51,Chase Savings,2026-09-03,Trader Joe's,84.32,Groceries
+52,Chase Checking,2026-09-06,Target,142.67,Utilities
+53,Amex Credit Card,2026-09-10,Spotify,11.99,Subscriptions
+54,Chase Checking,2026-09-08,Shell Gas,48.80,
+55,Chase Savings,2026-09-09,Netflix,15.49,Subscriptions
+56,Chase Checking,2026-09-13,Target,86.00,Gas
+57,Chase Checking,2026-09-18,Trader Joe's,71.00,Groceries
+58,Chase Checking,2026-09-12,Spotify,11.99,Utilities
+59,Amex Credit Card,2026-09-04,PG&E,121.91,Subscriptions
+60,Amex Credit Card,2026-09-08,Netflix,15.49,Subscriptions
+61,Chase Savings,2026-09-21,Spotify,11.99,Shopping
+62,Amex Credit Card,2026-09-21,Chevron,39.95,Dining
+63,Amex Credit Card,2026-09-18,PG&E,135.95,Dining
+64,Chase Savings,2026-09-11,Amazon,136.59,Shopping
+65,Chase Checking,2026-09-05,Safeway,105.42,Subscriptions
+66,Chase Checking,2026-09-18,PG&E,209.58,Shopping
+67,Amex Credit Card,2026-09-19,Trader Joe's,14.57,
+68,Chase Savings,2026-09-09,Trader Joe's,26.76,Gas
+69,Amex Credit Card,2026-09-09,Shell Gas,26.00,Shopping
+70,Chase Checking,2026-09-14,Safeway,12.00,Groceries
+71,Amex Credit Card,2026-09-18,Starbucks,7.01,Groceries
+72,Chase Checking,2026-09-15,Spotify,11.99,Utilities
+73,Amex Credit Card,2026-09-05,Amazon,105.13,Dining
+74,Chase Checking,2026-09-16,Amazon,39.93,
+75,Amex Credit Card,2026-09-18,Target,85.02,Groceries
+76,Chase Checking,2026-09-05,Shell Gas,62.80,Groceries
+77,Chase Checking,2026-09-02,Chevron,30.89,Groceries
+78,Amex Credit Card,2026-09-19,Shell Gas,41.77,Dining
+79,Amex Credit Card,2026-09-20,Chevron,61.47,Dining
+80,Chase Checking,2026-09-11,Spotify,11.99,
+81,Chase Savings,2026-09-21,Spotify,11.99,Utilities
+82,Chase Savings,2026-09-19,Amazon,19.12,Gas
+83,Chase Checking,2026-09-11,Netflix,15.49,Utilities
+84,Chase Checking,2026-09-18,PG&E,164.28,Shopping
+85,Amex Credit Card,2026-09-16,Trader Joe's,27.01,
+86,Amex Credit Card,2026-09-18,Shell Gas,52.27,Utilities
+87,Amex Credit Card,2026-09-10,Shell Gas,59.82,Shopping
+88,Chase Checking,2026-09-11,Shell Gas,61.22,Gas
+89,Chase Savings,2026-09-17,Trader Joe's,44.91,Gas
+90,Amex Credit Card,2026-09-04,Trader Joe's,49.09,Dining
+91,Chase Savings,2026-09-04,Shell Gas,59.21,
+92,Chase Checking,2026-09-07,Target,123.43,Gas
+93,Amex Credit Card,2026-09-04,Amazon,59.23,
+94,Chase Savings,2026-09-07,Amazon,50.80,
+95,Chase Checking,2026-09-14,Safeway,84.23,Groceries
+96,Amex Credit Card,2026-09-21,Chevron,50.58,Groceries
+97,Chase Savings,2026-09-08,PG&E,143.21,Shopping
+98,Amex Credit Card,2026-09-02,Amazon,143.28,Shopping
+99,Chase Checking,2026-09-09,Shell Gas,60.08,Subscriptions
+100,Amex Credit Card,2026-09-05,Spotify,11.99,
+101,Chase Savings,2026-09-19,Chevron,30.51,Dining
+102,Amex Credit Card,2026-09-07,Target,61.75,
+103,Chase Savings,2026-09-05,Amazon,42.10,
