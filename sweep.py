@@ -21,10 +21,10 @@ with psycopg.connect(url) as conn:
     names = ", ".join(row[0] for row in missing_accounts)
     lines.append(f"Missing accounts: {names}")
 
-    duplicates = conn.execute("select account_name, txn_date, lower(trim(merchant)) as merchant, amount, count(*) from tmp_raw_transactions group by account_name, txn_date, lower(trim(merchant)), amount having count(*) > 1;").fetchall()
-    lines.append("Duplicate candidates:")
+    duplicates = conn.execute("select account_name, txn_date, lower(trim(merchant)) as merchant, amount, count(*) from tmp_raw_transactions group by account_name, txn_date, lower(trim(merchant)), amount having count(*) > 1 order by txn_date;").fetchall()
+    lines.append("Duplicate candidates:\naccount | date | merchant | amount | copies")
     for account, date, merchant, amount, copies in duplicates:
-        lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies")
+        lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies on this date")
 
 report_input = "\n".join(lines)
 reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
