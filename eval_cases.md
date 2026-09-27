@@ -43,3 +43,5 @@ Expected verdict: all four groups are genuine duplicates. For the Safeway group,
 - Real repeats (two coffees the same day)
 - Pending then posted
 - Wrong account: Spotify subscription charged to Chase Savings
+- Netflix subscription frequency
+- Miscategorization of Netflix transactions 
