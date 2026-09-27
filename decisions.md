@@ -21,3 +21,15 @@ What happened: the model’s answers took too long to scan.
 Decision: shorten the final answer.
 Why: the customer should be able to see the key numbers and recommended fixes in seconds.
 Change: added an output style rule to system_prompt.md to lead with counts and use short lines with minimal explanation.
+
+## 2026-09-27: Outputs were still too wordy  
+What happened: runs 6 and 7 were still too wordy.  
+Decision: use a fixed output template.  
+Why: the general brevity rule left too much room for lengthy explanations.  
+Change: replaced the style rule with a short, one-line-per-item template.
+
+## 2026-09-27: Safeway marked "possible" again  
+What happened: run 6 marked the Safeway charge as possible instead of a duplicate.  
+Decision: make the duplicate rule direct.  
+Why: “likely” invited the model to hedge.  
+Change: instructed the model to treat an exact repeat of a large transaction as a duplicate, matching the subscription rule.

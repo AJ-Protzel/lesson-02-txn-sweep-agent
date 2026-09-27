@@ -27,6 +27,8 @@ with psycopg.connect(url) as conn:
         lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies on this date")
 
 report_input = "\n".join(lines)
-reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
 
-print(reply)
+for run in range(2):
+    reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
+    print(f"--- run {run + 1} ---")
+    print(reply)
