@@ -2,6 +2,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 import psycopg
+from claude_backend import call_cli
 
 load_dotenv()
 url = os.environ["DATABASE_URL"]
@@ -26,4 +27,6 @@ with psycopg.connect(url) as conn:
         lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies")
 
 report_input = "\n".join(lines)
-print(report_input)
+reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
+
+print(reply)

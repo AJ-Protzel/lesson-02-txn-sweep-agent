@@ -61,7 +61,8 @@ def call_cli(messages: list[dict], system: str, model: str = MODEL, effort: str 
 
     Each `claude -p` call starts fresh, so a multi-turn exchange is replayed as a
     single prompt. `--tools ""` leaves the model no tools at all: it can only
-    reply with text, never touch files.
+    reply with text, never touch files. The skill, MCP and settings flags stop the
+    user's personal Claude Code setup from leaking into the agent.
     """
     if len(messages) == 1:
         prompt = messages[0]["content"]
@@ -77,6 +78,10 @@ def call_cli(messages: list[dict], system: str, model: str = MODEL, effort: str 
             "--model", model,
             "--effort", effort,
             "--tools", "",
+            # Keep the user's own skills, MCP connectors and settings out of the agent.
+            "--disable-slash-commands",
+            "--strict-mcp-config",
+            "--setting-sources", "",
             "--no-session-persistence",
         ],
         input=prompt,
