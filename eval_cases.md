@@ -37,6 +37,8 @@ Which ones:
 | Amex Credit Card | 2026-09-08 | netflix | 15.49 | 2 |
 | Chase Savings | 2026-09-21 | spotify | 11.99 | 2 |
 
+Expected verdict: all four groups are genuine duplicates. For the Safeway group, the matching charges are for a large, specific amount. Because Safeway is a grocery store, that amount likely reflects a full shopping trip. It is unlikely that the customer bought the same cart of groceries twice.
+
 ## Cases to test later
 - Real repeats (two coffees the same day)
 - Pending then posted
