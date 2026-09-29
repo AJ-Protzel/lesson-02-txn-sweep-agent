@@ -8,27 +8,37 @@ load_dotenv()
 url = os.environ["DATABASE_URL"]
 system_prompt = Path("system_prompt.md").read_text(encoding="utf-8")
 
-lines = []
 
-with psycopg.connect(url) as conn:
-    total_rows = conn.execute("select count(*) from tmp_raw_transactions").fetchone()
-    lines.append(f"Total rows: {total_rows[0]}")
 
-    null_categories = conn.execute("select count(*) from tmp_raw_transactions where category is null;").fetchone()
-    lines.append(f"Null Categories: {null_categories[0]}")
+def run_sweep():
+    replies = []
+    lines = []
 
-    missing_accounts = conn.execute("select account_name from (values ('Chase Checking'), ('Chase Savings'), ('Amex Credit Card'), ('Discover Credit Card')) as expected(account_name) except select account_name from tmp_raw_transactions;").fetchall()
-    names = ", ".join(row[0] for row in missing_accounts)
-    lines.append(f"Missing accounts: {names}")
+    with psycopg.connect(url) as conn:
+        total_rows = conn.execute("select count(*) from tmp_raw_transactions").fetchone()
+        lines.append(f"Total rows: {total_rows[0]}")
 
-    duplicates = conn.execute("select account_name, txn_date, lower(trim(merchant)) as merchant, amount, count(*) from tmp_raw_transactions group by account_name, txn_date, lower(trim(merchant)), amount having count(*) > 1 order by txn_date;").fetchall()
-    lines.append("Duplicate candidates:\naccount | date | merchant | amount | copies")
-    for account, date, merchant, amount, copies in duplicates:
-        lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies on this date")
+        null_categories = conn.execute("select count(*) from tmp_raw_transactions where category is null;").fetchone()
+        lines.append(f"Null Categories: {null_categories[0]}")
 
-report_input = "\n".join(lines)
+        missing_accounts = conn.execute("select account_name from (values ('Chase Checking'), ('Chase Savings'), ('Amex Credit Card'), ('Discover Credit Card')) as expected(account_name) except select account_name from tmp_raw_transactions;").fetchall()
+        names = ", ".join(row[0] for row in missing_accounts)
+        lines.append(f"Missing accounts: {names}")
 
-for run in range(2):
-    reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
-    print(f"--- run {run + 1} ---")
-    print(reply)
+        duplicates = conn.execute("select account_name, txn_date, lower(trim(merchant)) as merchant, amount, count(*) from tmp_raw_transactions group by account_name, txn_date, lower(trim(merchant)), amount having count(*) > 1 order by txn_date;").fetchall()
+        lines.append("Duplicate candidates:\naccount | date | merchant | amount | copies")
+        for account, date, merchant, amount, copies in duplicates:
+            lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies on this date")
+
+    report_input = "\n".join(lines)
+
+    for run in range(2):
+        reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
+        replies.append(reply)
+
+    return replies
+
+if __name__ == "__main__":
+    for number, reply in enumerate(run_sweep(), start=1):
+        print(f"--- run {number} ---")
+        print(reply)
