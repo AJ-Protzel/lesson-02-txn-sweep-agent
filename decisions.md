@@ -57,3 +57,9 @@ What happened: check 6 compared a complete output line with "Confirmed duplicate
 Decision: fix the grader.
 Why: the check should recognize the label and then verify the transaction details within the line.
 Change: used startswith("Confirmed duplicate:") and checked that the expected merchant, date, and amount appear on that line.
+
+## 2026-09-29: Only Safeway is dropped in phase 2
+What happened: phase 1 confirmed four duplicate groups; the customer has only verified one.
+Decision: drop row 95; keep the Netflix and Spotify rows until the customer checks their statements.
+Why: the customer confirmed they went to Safeway once on 9/14, so row 95 is a duplicate.
+Change: added CONFIRMED_DUPLICATE_IDS to config.py; the clean step skips those ids.

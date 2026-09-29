@@ -92,7 +92,7 @@ def call_cli(messages: list[dict], system: str, model: str = MODEL, effort: str 
         timeout=300,
     )
     if proc.returncode != 0:
-        raise RuntimeError(f"claude -p exited {proc.returncode}: {proc.stderr.strip()[-300:]}")
+        raise RuntimeError(f"claude -p exited {proc.returncode}: {(proc.stderr or proc.stdout).strip()[-300:]}")
     return proc.stdout
 
 

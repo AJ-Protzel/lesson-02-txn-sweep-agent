@@ -14,16 +14,19 @@ EXPECTED_ACCOUNTS = [
     "Discover Credit Card",
 ]
 
-CATEGORIES = [
-    "Groceries",       # Grocery store purchases and ingredients for meals
-    "Dining",          # Restaurants, fast food, and other prepared meals
-    "Gas",             # Fuel purchases
-    "Shopping",        # Purchases that do not fit another specific category
-    "Bills",           # Rent, electricity, internet, phone, and similar expenses
-    "Subscriptions",   # Recurring nonessential charges, such as Netflix and Spotify
-    "Health",          # Medical copays, pharmacy purchases, and healthcare expenses
-    "Income",          # Money received from any source
-    "Transportation",  # Flights, hotels, public transit, Uber, Lyft, and related costs
-    "Transfers",       # Money moved between accounts
-    "Other",           # Catchall for later recategorization during email sweeps
-]
+CATEGORIES = {
+    "Groceries": "Grocery store purchases and ingredients for meals",
+    "Dining": "Restaurants, fast food, and other prepared meals",
+    "Gas": "Fuel purchases",
+    "Shopping": "General retail purchases that aren't food related.",
+    "Bills": "Rent, electricity, internet, phone, and similar expenses",
+    "Subscriptions": "Recurring nonessential charges, such as Netflix and Spotify",
+    "Health": "Medical copays, pharmacy purchases, and healthcare expenses",
+    "Income": "Money received from any source",
+    "Transportation": "Flights, hotels, public transit, Uber, Lyft, and related costs",
+    "Transfers": "Money moved between accounts",
+    "Other": "Catchall for later recategorization during email sweeps",
+}
+
+# Customer confirmed on the second call: Safeway 9/14 is one trip. Netflix and Spotify pending.
+CONFIRMED_DUPLICATE_IDS = [95]
