@@ -33,3 +33,9 @@ What happened: run 6 marked the Safeway charge as possible instead of a duplicat
 Decision: make the duplicate rule direct.  
 Why: “likely” invited the model to hedge.  
 Change: instructed the model to treat an exact repeat of a large transaction as a duplicate, matching the subscription rule.
+
+## 2026-09-29: Added a clear threshold for large amounts  
+What happened: the model continued to hedge on the repeated $84.23 Safeway charge.  
+Decision: define what counts as a large transaction.  
+Why: without a dollar threshold, the model could decide for itself whether $84.23 was large.  
+Change: added amount labels based on price: transactions over $60 are large, this number was chosen with no real basis. This makes the Safeway repeat subject to the exact-repeat duplicate rule. the label is computed in sweep.py

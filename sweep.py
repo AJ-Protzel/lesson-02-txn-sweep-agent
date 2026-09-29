@@ -26,9 +26,14 @@ def run_sweep():
         lines.append(f"Missing accounts: {names}")
 
         duplicates = conn.execute("select account_name, txn_date, lower(trim(merchant)) as merchant, amount, count(*) from tmp_raw_transactions group by account_name, txn_date, lower(trim(merchant)), amount having count(*) > 1 order by txn_date;").fetchall()
-        lines.append("Duplicate candidates:\naccount | date | merchant | amount | copies")
+        lines.append("Duplicate candidates:\naccount | date | merchant | amount | amount_size | copies")
         for account, date, merchant, amount, copies in duplicates:
-            lines.append(f"{account} | {date} | {merchant} | {amount} | {copies} copies on this date")
+            if amount > 60:
+                amount_size = "Large"
+            else:
+                amount_size = "Small"
+
+            lines.append(f"{account} | {date} | {merchant} | {amount} | {amount_size} | {copies} copies on this date")
 
     report_input = "\n".join(lines)
 
