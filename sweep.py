@@ -1,14 +1,13 @@
-from pathlib import Path
-from dotenv import load_dotenv
 import os
 import psycopg
+from pathlib import Path
+from dotenv import load_dotenv
 from claude_backend import call_cli
+from config import EXPECTED_ACCOUNTS
 
 load_dotenv()
 url = os.environ["DATABASE_URL"]
 system_prompt = Path("system_prompt.md").read_text(encoding="utf-8")
-
-
 
 def run_sweep(runs = 2):
     replies = []
@@ -21,9 +20,19 @@ def run_sweep(runs = 2):
         null_categories = conn.execute("select count(*) from tmp_raw_transactions where category is null;").fetchone()
         lines.append(f"Null Categories: {null_categories[0]}")
 
-        missing_accounts = conn.execute("select account_name from (values ('Chase Checking'), ('Chase Savings'), ('Amex Credit Card'), ('Discover Credit Card')) as expected(account_name) except select account_name from tmp_raw_transactions;").fetchall()
+        missing_accounts = conn.execute(
+            """
+            SELECT account_name
+            FROM unnest(%s::text[]) AS expected(account_name)
+            EXCEPT
+            SELECT account_name
+            FROM tmp_raw_transactions
+            """,
+            [EXPECTED_ACCOUNTS],
+        ).fetchall()
+
         names = ", ".join(row[0] for row in missing_accounts)
-        lines.append(f"Missing accounts: {names}")
+        lines.append(f"Missing accounts: {len(missing_accounts)} — {names or 'none'}")
 
         duplicates = conn.execute("select account_name, txn_date, lower(trim(merchant)) as merchant, amount, count(*) from tmp_raw_transactions group by account_name, txn_date, lower(trim(merchant)), amount having count(*) > 1 order by txn_date;").fetchall()
         lines.append("Duplicate candidates:\naccount | date | merchant | amount | amount_size | copies")
