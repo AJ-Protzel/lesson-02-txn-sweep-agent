@@ -3,7 +3,7 @@ import psycopg
 from pathlib import Path
 from dotenv import load_dotenv
 from claude_backend import call_cli
-from config import CATEGORIES
+from config import CATEGORIES, CONFIRMED_DUPLICATE_IDS
 
 load_dotenv()
 url = os.environ["CLEAN_DATABASE_URL"]
@@ -29,6 +29,32 @@ def categorize(merchants):
 
     return category_map
 
+def write_clean(category_map):
+    # One transaction: if any step fails, both tables keep their old contents.
+    with psycopg.connect(url) as conn:
+        conn.execute("delete from tmp_category_map")
+        for merchant, category in category_map.items():
+            conn.execute(
+                "insert into tmp_category_map (merchant, category) values (%s, %s)",
+                [merchant, category],
+            )
+
+        conn.execute("delete from tmp_clean_transactions")
+        conn.execute(
+            """
+            insert into tmp_clean_transactions (id, account_name, txn_date, merchant, amount, category)
+            select raw.id, raw.account_name, raw.txn_date, raw.merchant, raw.amount, map.category
+            from tmp_raw_transactions as raw
+            left join tmp_category_map as map on map.merchant = raw.merchant
+            where raw.id <> all(%s)
+            """,
+            [CONFIRMED_DUPLICATE_IDS],
+        )
+
+        return conn.execute("select count(*) from tmp_clean_transactions").fetchone()[0]
+
 if __name__ == "__main__":
-    for merchant, category in categorize(get_merchants()).items():
+    category_map = categorize(get_merchants())
+    for merchant, category in category_map.items():
         print(f"{merchant}: {category}")
+    print(f"Clean rows: {write_clean(category_map)}")
