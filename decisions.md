@@ -51,3 +51,9 @@ What happened: about 1 run in 27 still marked a repeated same-merchant subscript
 Decision: accept this remaining failure rate.
 Why: the pass rate stopped improving after three prompt changes.
 Change: recorded the known limit and made no further prompt change.
+
+## 2026-09-29: Grader compared whole duplicate lines
+What happened: check 6 compared a complete output line with "Confirmed duplicate", so a line containing the merchant, date, and amount could never match.
+Decision: fix the grader.
+Why: the check should recognize the label and then verify the transaction details within the line.
+Change: used startswith("Confirmed duplicate:") and checked that the expected merchant, date, and amount appear on that line.
