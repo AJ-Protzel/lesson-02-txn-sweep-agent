@@ -39,3 +39,15 @@ What happened: the model continued to hedge on the repeated $84.23 Safeway charg
 Decision: define what counts as a large transaction.  
 Why: without a dollar threshold, the model could decide for itself whether $84.23 was large.  
 Change: added amount labels based on price: transactions over $60 are large, this number was chosen with no real basis. This makes the Safeway repeat subject to the exact-repeat duplicate rule. the label is computed in sweep.py
+
+## 2026-09-29: Grader missed lowercase merchant names
+What happened: the grader marked some correct duplicate lines as failures when the model copied a lowercase merchant name from the input.
+Decision: fix the grader.
+Why: the match was case-sensitive even though capitalization does not change the duplicate judgment.
+Change: compare the expected text and the model’s line in lowercase.
+
+## 2026-09-29: Occasional subscription hedge accepted
+What happened: about 1 run in 27 still marked a repeated same-merchant subscription as possible.
+Decision: accept this remaining failure rate.
+Why: the pass rate stopped improving after three prompt changes.
+Change: recorded the known limit and made no further prompt change.

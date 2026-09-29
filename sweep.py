@@ -10,7 +10,7 @@ system_prompt = Path("system_prompt.md").read_text(encoding="utf-8")
 
 
 
-def run_sweep():
+def run_sweep(runs = 2):
     replies = []
     lines = []
 
@@ -37,7 +37,7 @@ def run_sweep():
 
     report_input = "\n".join(lines)
 
-    for run in range(2):
+    for run in range(runs):
         reply = call_cli([{"role": "user", "content": report_input}], system=system_prompt)
         replies.append(reply)
 
