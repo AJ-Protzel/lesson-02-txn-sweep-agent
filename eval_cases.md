@@ -46,3 +46,4 @@ Expected verdict: all four groups are genuine duplicates. For the Safeway group,
 - Netflix subscription frequency
 - Miscategorization of Netflix transactions 
 - Duplicate row vs. real double charge
+- Uber Eats vs Uber categorization

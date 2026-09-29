@@ -13,3 +13,17 @@ EXPECTED_ACCOUNTS = [
     "Amex Credit Card",
     "Discover Credit Card",
 ]
+
+CATEGORIES = [
+    "Groceries",       # Grocery store purchases and ingredients for meals
+    "Dining",          # Restaurants, fast food, and other prepared meals
+    "Gas",             # Fuel purchases
+    "Shopping",        # Purchases that do not fit another specific category
+    "Bills",           # Rent, electricity, internet, phone, and similar expenses
+    "Subscriptions",   # Recurring nonessential charges, such as Netflix and Spotify
+    "Health",          # Medical copays, pharmacy purchases, and healthcare expenses
+    "Income",          # Money received from any source
+    "Transportation",  # Flights, hotels, public transit, Uber, Lyft, and related costs
+    "Transfers",       # Money moved between accounts
+    "Other",           # Catchall for later recategorization during email sweeps
+]
