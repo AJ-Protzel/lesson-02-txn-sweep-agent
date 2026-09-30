@@ -1,10 +1,22 @@
 # lesson-02-txn-sweep-agent
 
 An agent that sweeps a customer's Supabase transaction table, reports what is
-wrong with it, and later cleans it and sends a weekly wrap-up.
+wrong with it, then categorizes every merchant and builds a clean copy of the
+table. Each phase is graded against answers computed by hand before any agent
+code existed.
 
 Second in a series of small agent projects; a more hands-on redo of
 [lesson-01-csv-qa-agent](https://github.com/AJ-Protzel/lesson-01-csv-qa-agent).
+
+## How it was built
+
+Built with Claude Code, split by who did what:
+
+- By hand: both customer calls, the eval cases and their expected answers (in
+  SQL), both prompts, `sweep.py`, `test_sweep.py`, and every entry in
+  `decisions.md`.
+- With Claude Code, reviewed line by line: `claude_backend.py`, `clean.py`,
+  `test_clean.py`.
 
 ## The customer
 
@@ -108,6 +120,23 @@ checked to make the grader fail.
 - Drop the Netflix and Spotify duplicates once the customer confirms them.
 - Reconnect Discover on the customer's side.
 
+## What I took from building this
+
+- Fixing the input beat fixing the prompt. The model merged two separate
+  Netflix duplicate groups until the candidate lines were sorted and given a
+  header; no prompt wording fixed that as cleanly.
+- A word like "large" invites the model to decide for itself. The Safeway
+  repeat was hedged on until code computed a Large/Small label at a fixed
+  threshold and the prompt only had to apply it.
+- Two of the failures were in my grader, not the model. A failing check is a
+  question about the check first.
+- Ship when the pass rate stops moving, not at 100%. One subscription hedge in
+  27 runs survived three prompt changes, so it is recorded as a known limit.
+- Give each phase only the access it needs. The sweep holds a read-only key;
+  the clean step has its own key that can write two tables and nothing else.
+- Let code do what code can do. The model judges duplicates and names
+  categories; SQL does the counting, the joins and every write.
+
 ## Calling Claude
 
 `claude_backend.py` gives every entry point the same two backends, as in
@@ -125,17 +154,19 @@ bills the API by accident.
 
 ## Sample data
 
-`sample_data/` is a snapshot of the customer's tables so anyone who clones the
-repo can run the agent without access to the live database. It is generated
-data, not real transactions.
+`sample_data/` is a snapshot of the customer's tables. The live database has
+been retired, so to run the agent, load it into your own Postgres or Supabase
+project with `schema.sql`. It is generated data, not real transactions.
 
 | file | contents |
 |---|---|
-| `raw_transactions.csv` | 103 rows, 2026-09-02 to 2026-09-21, taken 2026-09-22 |
-| `schema.sql` | creates the raw table and the two tables phase 2 builds, and shows how to load the CSV |
+| `raw_transactions.csv` | the input: 103 rows, 2026-09-02 to 2026-09-21 |
+| `category_map.csv` | phase 2 output: 10 merchants and their categories |
+| `clean_transactions.csv` | phase 2 output: 102 rows, categorized, confirmed duplicate removed |
+| `schema.sql` | creates the three tables and the two least-access roles, and shows how to load the CSV |
 
-The clean table was empty at snapshot time. Discover Credit Card is
-deliberately absent from the data to test the missing-account check.
+Discover Credit Card is deliberately absent from the data to test the
+missing-account check.
 
 ## Examples vs. shipped code
 
