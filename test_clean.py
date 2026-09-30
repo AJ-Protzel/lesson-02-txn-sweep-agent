@@ -2,7 +2,7 @@ import psycopg
 from clean import url, get_merchants, categorize, write_clean
 from config import CATEGORIES, CONFIRMED_DUPLICATE_IDS
 
-runs = 5
+runs = 9
 all_pass_runs = 0
 total_runs = 0
 
