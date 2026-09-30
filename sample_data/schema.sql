@@ -11,10 +11,19 @@ create table if not exists tmp_raw_transactions (
     category     text
 );
 
--- Empty in the snapshot; the customer set it up but never filled it.
+-- Built by clean.py in phase 2; empty in the snapshot.
+create table if not exists tmp_category_map (
+    merchant text primary key,
+    category text not null
+);
+
 create table if not exists tmp_clean_transactions (
-    id    integer primary key,
-    notes text
+    id           integer primary key,
+    account_name text    not null,
+    txn_date     date    not null,
+    merchant     text    not null,
+    amount       numeric not null,
+    category     text    not null
 );
 
 -- Load the rows (psql, from the repo root):

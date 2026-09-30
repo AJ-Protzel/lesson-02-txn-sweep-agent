@@ -132,7 +132,7 @@ data, not real transactions.
 | file | contents |
 |---|---|
 | `raw_transactions.csv` | 103 rows, 2026-09-02 to 2026-09-21, taken 2026-09-22 |
-| `schema.sql` | creates `tmp_raw_transactions` and `tmp_clean_transactions` and shows how to load the CSV |
+| `schema.sql` | creates the raw table and the two tables phase 2 builds, and shows how to load the CSV |
 
 The clean table was empty at snapshot time. Discover Credit Card is
 deliberately absent from the data to test the missing-account check.
