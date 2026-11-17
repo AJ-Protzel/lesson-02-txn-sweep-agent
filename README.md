@@ -38,7 +38,7 @@ They expect four accounts in their data:
 |---|---|---|---|
 | 1 | Sweep the table: find data errors, check every expected account is present | read-only key | done 2026-09-29 |
 | 2 | Fix what the sweep found: categorize every merchant, build a clean table | write key from the customer | done 2026-09-29 |
-| 3 | Weekly wrap-up email on the database, then hand off the agent | write key | next steps |
+| 3 | Weekly wrap-up email on the database, then hand off the agent | write key | not built |
 
 Step 1 is read-only. Step 2 runs from a separate script with a separate key
 that can write only the two tables it builds.
@@ -112,7 +112,9 @@ only that row is dropped and the rest wait for their statements. 14 of 14 runs
 passed all seven checks across two batches. A planted wrong category was
 checked to make the grader fail.
 
-## Next steps
+## Not built
+
+The lesson closed after step 2; these were left open on purpose.
 
 - Weekly wrap-up email and hand-off (step 3).
 - Keep approved merchant categories and send only new merchants to Claude, so
